@@ -1,7 +1,7 @@
 import jax.numpy as jnp
 from jax import random, jit, lax
 import numpy as np
-from scipy.fft import fft, fftfreq
+from scipy.fft import fft, ifft, fftfreq
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -178,3 +178,25 @@ def spectrum_linear(field: np.ndarray, res: float, title: str = None, save_path:
     if save_path is not None:
         fig.savefig(save_path, dpi=300, transparent=False, bbox_inches="tight")
         plt.close(fig)
+
+
+def compute_1der_spec(u: np.array) -> np.ndarray:
+    uhat = fft(u)
+
+    kappa = 2 * np.pi * fftfreq(u.shape[-1], d=1 / u.shape[-1])
+
+    d_uhat = (1j) * kappa * uhat
+    d_u = ifft(d_uhat)
+
+    return d_u.real
+
+
+def compute_2der_spec(u: np.array) -> np.ndarray:
+    uhat = fft(u)
+
+    kappa = 2 * np.pi * fftfreq(u.shape[-1], d=1 / u.shape[-1])
+
+    dd_uhat = -np.power(kappa, 2) * uhat
+    dd_u = ifft(dd_uhat)
+
+    return dd_u.real

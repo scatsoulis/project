@@ -66,9 +66,11 @@ ax.plot(grid_x, u[-1].squeeze(), label=r"$u_0$", color="blue")
 ax.ticklabel_format(style="sci", axis="y", scilimits=(0, 0))
 
 spectrum_linear(u0, res=2 * np.pi * 16 / 256)
-spectrum_log(u0, res=2 * np.pi * 16 / 256)
+spectrum_log(u0, res=2 * np.pi * 16 / 256, save_path="figures/spec0.png")
 spectrum_log(u_burnin, res=2 * np.pi * 16 / 256)
-spectrum_log(u_last, res=2 * np.pi * 16 / 256)
+spectrum_log(u_last, res=2 * np.pi * 16 / 256, save_path="figures/specF.png")
+
+sys.exit()
 
 
 spec = np.zeros((u.shape[0], u.shape[1] // 2))
@@ -120,6 +122,7 @@ plt.imshow(
 plt.colorbar(cmap="plasma", label="u(x, t)", extend="both")
 plt.xlabel(r"$t$")
 plt.ylabel(r"$x$")
+plt.savefig("u_field.pdf", dpi=300, transparent=False, bbox_inches="tight")
 
 
 sys.exit()

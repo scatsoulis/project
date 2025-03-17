@@ -7,15 +7,15 @@ key = random.key(0)
 
 
 # all_steps = True/False : data at all/final time(s)
-def ks_step_data_collector(KS: KuramotoSivashinsky, num_steps: int, y0: np.ndarray, all_steps: bool = True) -> np.ndarray:
-    y_full = np.zeros((num_steps + 1, len(y0)))
-    y_full[0] = y0
+def ks_step_data_collector(KS: KuramotoSivashinsky, num_steps: int, u0: np.ndarray, all_steps: bool = True) -> np.ndarray:
+    u_full = np.zeros((num_steps + 1, len(u0)))
+    u_full[0] = u0
     for i in range(num_steps):
-        y_full[i + 1] = KS.step(y_full[i])
+        u_full[i + 1] = KS.step(u_full[i])
 
     if all_steps:
-        return y_full
-    return y_full[-1]
+        return u_full
+    return u_full[-1]
 
 
 def main() -> None:
@@ -37,7 +37,7 @@ def main() -> None:
     data = np.zeros((samples, train_period + 1, len(x)))
     for i in tqdm(range(samples)):
         u0 = u_rand(KS.L)  # Generate ICs
-        data[i, :, :] = ks_step_data_collector(KS, train_period, (x))  # Generate KS data
+        data[i, :, :] = ks_step_data_collector(KS, train_period, u0(x))  # Generate KS data
 
     outname = f"{path}/data/KSdata_dt{dt}_Nx{Nx}_L{round(L, 2)}_M{modes}_time{train_period}_samples{samples}_lambda{lambda_param}.npy"
     np.save(outname, data)
