@@ -4,6 +4,11 @@ from jax_models import *
 from enki import EKI
 import pickle
 
+# ENKI for nudging parameter \mu and KS parameter \lambda
+# Learn optimal nudging parameter and lambda for given system
+# Can change resolution of low-resolution model,
+# the temporal frequency with which you nudge, 
+# and other parameters
 
 ## Forward model G, all ensemble members
 # list of mu

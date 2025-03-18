@@ -4,6 +4,10 @@ from jax_models import *
 from enki import EKI
 import pickle
 
+# ENKI KS parameter \lambda
+# Learn optimal parameter lambda for given system
+# Can change resolution of low-resolution model,
+# and other parameters
 
 ## Forward model G, all ensemble members
 # list of mu

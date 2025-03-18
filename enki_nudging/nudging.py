@@ -2,6 +2,7 @@ import numpy as np
 from KS_solver import KS_step, KS_step_nudge
 from jax_models import *
 
+# Code illustrating examples of nudging (nudging parameter explicitly given)
 
 def main():
 

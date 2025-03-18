@@ -5,6 +5,12 @@ from enki import EKI
 import pickle
 
 
+# ENKI for nudging parameter \mu
+# Learn optimal nudging parameter for given system
+# Can change resolution of low-resolution model,
+# the temporal frequency with which you nudge, 
+# and other parameters
+
 ## Forward model G, all ensemble members
 # list of mu
 def ensembleG(mu, data, params):
